@@ -1,7 +1,9 @@
 import express from 'express'
 import adminRoute from './routers/admin.js'
+import userRoute from './routers/user.js'
 import mongoose from 'mongoose';
-import 'dotenv/config'
+import 'dotenv/config';
+import cors from 'cors';
 const app = express();
 const PORT = 5000;
 
@@ -25,5 +27,6 @@ mongoose.connect(process.env.MONGODB_URI)
 app.get('/', async (req, res) => {
     res.send(user);
 })
-
+app.use(cors())
 app.use('/admin', adminRoute)
+app.use('/adminusers', userRoute)
